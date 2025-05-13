@@ -1,5 +1,5 @@
-# redirect_check
-A fast and concurrent redirect checker. This tool uses a headless browser to detect client-side (JavaScript-based) and server-side redirects from a list of subdomains.
+# Subdomain-Redirect-Checker
+A fast and concurrent redirect checker. This Go tool checks for JavaScript-based and meta-refresh redirects across a list of subdomains using a headless browser powered by chromedp. It's ideal for bug bounty recon, redirect detection. 
 
 # 🚦 Headless Redirect Checker using ChromeDP
 
@@ -7,14 +7,24 @@ A fast and concurrent redirect checker built using [chromedp](https://github.com
 
 ---
 
-## 🔧 Features
+##  🚀 Features
+- ✅ Detects redirect chains using real browser rendering
 
-- ✅ Detects both server-side and JavaScript-based redirects
-- 🚀 Uses `chromedp` with headless Chrome for accurate navigation
-- 🔁 Shows only actual redirected subdomains (not same-host redirects)
-- 🧠 Automatically adds `http://` scheme if missing
-- 🌈 Color-coded terminal output for clarity
-- 🧵 Concurrent with configurable goroutine limit
+- 🌐 Supports both HTTP and HTTPS fallback
+
+- 🎨 Color-coded output:
+
+- 🟨 Normal redirects
+
+- 🟩 HTTP → HTTPS redirects
+
+- 🧠 Filters out known safe redirects like www.domain.com → domain.com
+
+- 📦 Groups output by final redirect destination
+
+- 🧵 Handles multiple subdomains concurrently (configurable)
+
+- 💾 Saves results to redirects.txt in a grouped format
 
 
 ---
@@ -52,9 +62,14 @@ A fast and concurrent redirect checker built using [chromedp](https://github.com
 
 ## ⚠️ Notes
 
+This tool uses a headless browser, so it's slower than curl-based tools — but far more accurate.
+
+The output intentionally ignores trivial changes (like www. removal) to reduce noise.
+
 Works best on public internet-facing domains.
+
 Avoid using on very large lists without rate-limiting or proxies.
-Requires a working Chrome/Chromium installation (or compatible headless browser).
+
 
 
 ---
